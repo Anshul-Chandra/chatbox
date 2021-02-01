@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package chatbox.proto.v1;
+option go_package = "github.com/chatbox/proto/v1/user";
+
+import "user.proto";
+import "google/api/annotations.proto";
+
+service UserService {
+    rpc Get(GetUserRequest) returns (GetUserResponse) {
+        option (google.api.http) = {
+            get: "/v1/user/{user_id}"
+        };
+    };
+
+    rpc List(ListUserRequest) returns (ListUserResponse) {
+        option (google.api.http) = {
+            get: "/v1/user/{user_id}/group/{group_id}/users"
+        };
+    };
+}
+
+message GetUserRequest {
+    string user_id = 1;
+}
+
+message GetUserResponse {
+    chatbox.proto.v1.User user = 1;
+}
+
+message ListUserRequest {
+    string user_id = 1;
+    string group_id = 2;
+}
+
+message ListUserResponse {
+    repeated chatbox.proto.v1.User users = 1;
+}

@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package chatbox.proto.v1;
+option go_package = "github.com/chatbox/proto/v1/message";
+
+import "google/protobuf/timestamp.proto";
+
+message Message {
+    string message = 1;
+    string sender = 2;
+    string receiver = 3;
+    google.protobuf.Timestamp send_time = 4;
+}

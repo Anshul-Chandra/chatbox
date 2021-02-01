@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package chatbox.proto.v1;
+option go_package = "github.com/chatbox/proto/v1/group";
+
+message Group {
+    string id = 1;
+    string name = 2;
+}

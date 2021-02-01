@@ -1,0 +1,81 @@
+syntax = "proto3";
+
+package chatbox.proto.v1;
+option go_package = "github.com/chatbox/proto/v1/group";
+
+import "group.proto";
+import "google/api/annotations.proto";
+
+service GroupService {
+    rpc Create(CreateGroupRequest) returns (CreateGroupResponse) {
+        option (google.api.http) = {
+            post: "/v1/group"
+            body: "*"
+        };
+    };
+
+    rpc Delete(DeleteGroupRequest) returns (DeleteGroupResponse) {
+        option (google.api.http) = {
+            delete: "/v1/group/{group_id}"
+        };
+    };
+    
+    rpc Update(UpdateGroupRequest) returns (UpdateGroupResponse) {
+        option (google.api.http) = {
+            post: "/v1/group/{group.id}"
+            body: "*"
+        };
+    };
+
+    rpc Get(GetGroupRequest) returns (GetGroupResponse) {
+        option (google.api.http) = {
+            get: "/v1/group/{group_id}"
+        };
+    };
+
+    rpc List(ListGroupRequest) returns (ListGroupResponse) {
+        option (google.api.http) = {
+            get: "/v1/user/{user_id}/groups"
+        };
+    };
+}
+
+message CreateGroupRequest {
+    chatbox.proto.v1.Group group = 1;
+}
+
+message CreateGroupResponse {
+    chatbox.proto.v1.Group group = 1;
+}
+
+message DeleteGroupRequest {
+    string group_id = 1;
+}
+
+message DeleteGroupResponse {
+    string message = 1;
+}
+
+message UpdateGroupRequest {
+    chatbox.proto.v1.Group group = 1;
+}
+
+message UpdateGroupResponse {
+    chatbox.proto.v1.Group group = 1;
+}
+
+message GetGroupRequest {
+    string group_id = 1;
+}
+
+message GetGroupResponse {
+    chatbox.proto.v1.Group group = 1;
+}
+
+message ListGroupRequest {
+    string user_id = 1;
+}
+
+message ListGroupResponse {
+    repeated chatbox.proto.v1.Group groups = 1;
+}
